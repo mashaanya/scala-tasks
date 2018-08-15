@@ -85,10 +85,7 @@ object Main extends App {
 task 5
 ```scala
 object Main extends App {
-  //implicit def intoRational(n:Int) = new Rational(n)
-  //val a = new Complex(2,3)
-  //  val b = new Complex(1,3)
-  //  print(a/b)
+
 
 
   def f(a: Int,  l: List[Int], d: Int): List[Int] = {
