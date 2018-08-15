@@ -38,20 +38,72 @@ task 3
 object Main extends App {
 
 
-  def nthGreatestDivisior(a: Int, n: Int, l: List[Int], d: Int): List[Int] = {
-    if (d > 0 && a % d == 0) nthGreatestDivisior(a, n, l :+ d, d - 1)
-    else if (d > 0 && a % d != 0) nthGreatestDivisior(a, n, l, d - 1)
+  def f(a: Int, n: Int, l: List[Int], d: Int): List[Int] = {
+    if (d > 0 && a % d == 0) f(a, n, l :+ d, d - 1)
+    else if (d > 0 && a % d != 0) f(a, n, l, d - 1)
     else l
 
+  }
+  def nthGreatestDivisior(a:Int,n:Int) = {
+    val d=a
+    val l=f(a,n,List(),d)
+    val p= l.reverse
+    val w = p.take(n)
+    print(w.last)
   }
 
   val a = 12
   val n = 3
-  val d = a
-  val l = List()
-  val q = nthGreatestDivisior(a, n, l, d)
-  val p= q.reverse
-  val w = p.take(n)
-  print(w.last)
+ nthGreatestDivisior(a,n)
+```
+task 4
+```scala
+object Main extends App {
+
+
+  def f(a: Int,  l: List[Int], d: Int): List[Int] = {
+    if (d > 0 && a % d == 0) f(a, l :+ d, d - 1)
+    else if (d > 0 && a % d != 0) f(a, l, d - 1)
+    else l
+  }
+  def numOfDivisiors(n:Int) = {
+    val d=n
+    val q=f(n,List(),d)
+    q.length
+  }
+  def sumOfDivisiors(n:Int) = {
+    val d=n
+    val q=f(n,List(),d)
+    q.foldLeft(0){(acc,i)=> acc + i }
+  }
+
+  val n = 12
+  println(numOfDivisiors(n))
+  println(sumOfDivisiors(n))
+}
+```
+task 5
+```scala
+object Main extends App {
+  //implicit def intoRational(n:Int) = new Rational(n)
+  //val a = new Complex(2,3)
+  //  val b = new Complex(1,3)
+  //  print(a/b)
+
+
+  def f(a: Int,  l: List[Int], d: Int): List[Int] = {
+    if (d > 0 && a % d == 0) f(a, l :+ d, d - 1)
+    else if (d > 0 && a % d != 0) f(a, l, d - 1)
+    else l
+  }
+ def isPrime(n:Int) = {
+   val d=n
+   val q=f(n,List(),d)
+   if (q.length == 2) True
+   else False
+
+ }
+  val n=15
+  print(isPrime(n))
 }
 ```
