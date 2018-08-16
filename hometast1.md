@@ -48,8 +48,8 @@ object Main extends App {
     def g(f:List[String],x:List[String],y:List[String],l:List[String]):List[String] = {
       f match {
         case a :: Nil => l
-        case a :: tail if (x.contains(a.last) && y.contains(tail.head)) =>  g(tail, x, y, l :+ "1")
-        case a :: tail if (y.contains(a.last) && x.contains(tail.last)) => g(tail,x,y,l:+"1")
+        case a :: tail if (x.contains(a) && y.contains(tail.head)) =>  g(tail, x, y, l :+ "1")
+        case a :: tail if (y.contains(a) && x.contains(tail.head)) => g(tail,x,y,l:+"1")
         case a :: tail => g(tail, x, y, l)
         case _ => throw new Exception
       }
