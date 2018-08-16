@@ -34,7 +34,7 @@ object Main extends App {
   val a = List(1,-1,1,-1)
   println(RLE(a).length-1)
   ```
-  task 2 (не понимаю почему она не выходит из рекурсии)
+  task 2 
   ```scala
   object Main extends App {
 
