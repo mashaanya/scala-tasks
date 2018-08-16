@@ -46,7 +46,7 @@ object Main extends App {
 
 
     def g(f:List[String],x:List[String],y:List[String],l:List[String]):List[String] = {
-      i match {
+      f match {
         case a :: Nil => l
         case a :: tail if (x.contains(a.last) && y.contains(tail.head)) =>  g(tail, x, y, l :+ "1")
         case a :: tail if (y.contains(a.last) && x.contains(tail.last)) => g(tail,x,y,l:+"1")
