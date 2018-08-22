@@ -14,8 +14,12 @@ create table table_2 (user_id int, phone_number int, years_of_experience int, pr
 insert into table_2 values(1,433443,2);
 insert into table_2 values(2,111111,1);
 insert into table_2 values(3,123456,7);
-insert into table_2 values(4,1235678,0);
+insert into table_2 values(4,123568,0);
 insert into table_2 values(5,191919,1);
 insert into table_2 values(6,121212,1);
-UPDATE table_2 SET years_of_experience=9 WHERE EXISTS (select name from table_1 where name='Max') ;
+UPDATE table_2 SET years_of_experience=9 WHERE EXISTS (select name from table_1 where (name='Max') and (table_1.user_id = table_2.user_id) ) ;
 select years_of_experience from table_2 where user_id =3;
+select name from table_1 where (age>=23 and age<27) or (salary = 1000);
+select * from table_1 where (name = 'John') or (name  = 'Mary');
+select phone_number from table_2 where exists (select name from table_1 where (name= 'John') and (table_1.user_id = table_2.user_id));
+select name from table_1 where exists (select phone_number from table_2 where (table_1.user_id = table_2.user_id) and (phone_number/100000 = 1));
