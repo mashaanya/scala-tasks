@@ -23,3 +23,4 @@ select name from table_1 where (age>=23 and age<27) or (salary = 1000);
 select * from table_1 where (name = 'John') or (name  = 'Mary');
 select phone_number from table_2 where exists (select name from table_1 where (name= 'John') and (table_1.user_id = table_2.user_id));
 select name from table_1 where exists (select phone_number from table_2 where (table_1.user_id = table_2.user_id) and (phone_number/100000 = 1));
+select name from table_1 where exists (select years_of_experience from table_2 where (table_1.user_id = table_2.user_id) and (years_of_experience>2));
