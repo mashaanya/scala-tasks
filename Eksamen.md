@@ -120,3 +120,65 @@ object Take{
 }
 
 ```
+Actors
+```scala
+import akka.pattern.pipe
+import akka.actor._
+import akka.http.scaladsl.server.Directives.{complete, pathPrefix}
+import akka.http.scaladsl.server.Route
+import akka.pattern.{ask, pipe}
+import akka.util.Timeout
+import akka.http.scaladsl.server.PathMatchers.Remaining
+
+import scala.collection._
+import scala.concurrent.duration._
+import scala.concurrent.ExecutionContext.Implicits.global
+case class are_you_telegram()
+case object Start
+class ActorRCO extends Actor with ActorLogging {
+  implicit val timeout = Timeout(5 seconds)
+  val system = ActorSystem("system")
+  val Actor1 = system.actorOf(Props(new Actor1), "Actor1")
+  val Actor2 = system.actorOf(Props(new Actor2), "Actor2")
+  val Actor3 = system.actorOf(Props(new Actor3), "Actor3")
+  def receive ={
+    case Start =>
+      val res= Actor1 ? are_you_telegram()
+      res pipeTo self
+      Actor1 ! PoisonPill
+      val ras = Actor2 ? are_you_telegram()
+      ras pipeTo self
+      Actor2 ! PoisonPill
+      val ros = Actor3 ? are_you_telegram()
+      ros pipeTo self
+      Actor3 ! PoisonPill
+      
+    case _ => throw new Exception
+  }
+
+}
+class Actor1 extends Actor with ActorLogging{
+  def receive ={
+    case i:are_you_telegram => log.warning("Yes")
+  }
+}
+class Actor2 extends Actor with ActorLogging{
+  def receive ={
+    case i:are_you_telegram => log.warning("No")
+  }
+}
+class Actor3 extends Actor with ActorLogging{
+  def receive ={
+    case i:are_you_telegram => log.warning("Yes")
+  }
+}
+object RCO extends App {
+  implicit val timeout = Timeout(5 seconds)
+    val system = ActorSystem("system")
+    val ActorRCO = system.actorOf(Props(new ActorRCO), "ActorRCO")
+    ActorRCO ! Start
+
+
+
+}
+```
